@@ -20,7 +20,7 @@ const Login = () => {
       <div>
         <div>
           <h1>Login</h1>
-          <h2></h2>
+          <h2>This is Login page</h2>
         </div>
       </div>
     </Box>
