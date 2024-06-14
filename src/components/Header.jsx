@@ -27,7 +27,7 @@ const Header = () => {
             Login
           </Link>
           <Link className="text-sm text-blue-600 underline" to={"/register"}>
-            Register New Account
+            Register
           </Link>
         </>
       )}

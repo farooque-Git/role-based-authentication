@@ -5,7 +5,7 @@ import { doCreateUserWithEmailAndPassword } from "../firebase/auth";
 
 const Register = () => {
   const navigate = useNavigate();
-
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
@@ -16,26 +16,46 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      return;
+    }
     if (!isRegistering) {
       setIsRegistering(true);
-      await doCreateUserWithEmailAndPassword(email, password);
+      try {
+        await doCreateUserWithEmailAndPassword(email, password, name);
+        navigate("/home");
+      } catch (error) {
+        setErrorMessage(error.message);
+        setIsRegistering(false);
+      }
     }
   };
 
   return (
     <>
       {userLoggedIn && <Navigate to={"/home"} replace={true} />}
-
       <main className="w-full h-screen flex self-center place-content-center place-items-center">
         <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
           <div className="text-center mb-6">
             <div className="mt-2">
               <h3 className="text-gray-800 text-xl font-semibold sm:text-2xl">
-                Create a New Account
+                Create an Account
               </h3>
             </div>
           </div>
           <form onSubmit={onSubmit} className="space-y-4">
+            <div>
+              <label className="text-sm text-gray-600 font-bold">Name</label>
+              <input
+                type="text"
+                autoComplete="name"
+                required
+                value={name} // Bound input to name state
+                onChange={(e) => setName(e.target.value)} // Set name state on change
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:indigo-600 shadow-sm rounded-lg transition duration-300"
+              />
+            </div>
             <div>
               <label className="text-sm text-gray-600 font-bold">Email</label>
               <input
@@ -43,13 +63,10 @@ const Register = () => {
                 autoComplete="email"
                 required
                 value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:indigo-600 shadow-sm rounded-lg transition duration-300"
               />
             </div>
-
             <div>
               <label className="text-sm text-gray-600 font-bold">
                 Password
@@ -60,13 +77,10 @@ const Register = () => {
                 autoComplete="new-password"
                 required
                 value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
               />
             </div>
-
             <div>
               <label className="text-sm text-gray-600 font-bold">
                 Confirm Password
@@ -77,17 +91,13 @@ const Register = () => {
                 autoComplete="off"
                 required
                 value={confirmPassword}
-                onChange={(e) => {
-                  setconfirmPassword(e.target.value);
-                }}
+                onChange={(e) => setconfirmPassword(e.target.value)}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
               />
             </div>
-
             {errorMessage && (
               <span className="text-red-600 font-bold">{errorMessage}</span>
             )}
-
             <button
               type="submit"
               disabled={isRegistering}
@@ -100,7 +110,7 @@ const Register = () => {
               {isRegistering ? "Signing Up..." : "Sign Up"}
             </button>
             <div className="text-sm text-center">
-              Already have an account? {"   "}
+              Already have an account?{" "}
               <Link
                 to={"/login"}
                 className="text-center text-sm hover:underline font-bold"
