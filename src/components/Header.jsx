@@ -28,20 +28,29 @@ const Header = () => {
             src=""
           /> */}
           {/* Logo Text  */}
-          <span>Dev Crux</span>
+          <span>Dev Camp</span>
         </Typography>
       </Link>
 
       <div className="ml-auto flex items-center gap-x-2 mr-5">
         {userLoggedIn ? (
           <>
+            {/* <button
+              class="bg-black m-2 p-2 hover:bg-gray-500 text-white font-semibold hover:text-black py-2 px-4 border border-gray-600 hover:border-transparent rounded"
+              onClick={() => {
+                navigate("/createblogpost");
+              }}
+            >
+              Create Your Blog
+            </button> */}
+
             <button
               onClick={() => {
                 doSignOut().then(() => {
                   navigate("/login");
                 });
               }}
-              className="font-bold text-blue-600 hover:underline"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Logout
             </button>

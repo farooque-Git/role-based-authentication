@@ -1,9 +1,11 @@
 import { AuthProvider } from "./context/authContext";
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import CreateBlogPost from "./components/CreateBlogPost";
+import { child } from "firebase/database";
 
 function App() {
   const routesArray = [
@@ -23,6 +25,10 @@ function App() {
       path: "/home",
       element: <Home />,
     },
+    {
+      path: "/createblogpost",
+      element: <CreateBlogPost />,
+    },
   ];
   let routesElement = useRoutes(routesArray);
   return (
@@ -34,3 +40,12 @@ function App() {
 }
 
 export default App;
+
+// export const ProtectedForAdmin = ({ children }) => {
+//   const admin = JSON.parse(localStorage.getItem("admin"));
+//   if (admin?.user?.email === "faroque.reactjs@gmail.com") {
+//     return children;
+//   } else {
+//     return <Navigate to={"/login"} />;
+//   }
+// };

@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "../context/authContext";
 import HeroSection from "./HeroSection";
-import BlogPost from "./BlogPost";
+import BlogPost from "./CreateBlogPost";
 
 //login register - DONE
 //context  - DONE
@@ -17,7 +17,6 @@ const Home = () => {
       {currentUser.displayName ? currentUser.displayName : currentUser.email},
       you are now logged in. */}
       <HeroSection />
-      <BlogPost />
     </div>
   );
 };
