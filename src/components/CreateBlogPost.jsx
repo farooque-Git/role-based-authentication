@@ -13,6 +13,7 @@ const CreateBlogPost = () => {
 
   const addPost = async () => {
     if (blog.content === "") {
+      console.log("Content is empty:", blog.content);
       return toast.error("Please fill all fields");
     }
 
@@ -30,7 +31,7 @@ const CreateBlogPost = () => {
   };
 
   return (
-    <div className="container m-24 mx-auto max-w-5xl ">
+    <div className="container m-24   mx-auto max-w-5xl ">
       <Editor
         apiKey="38r8xst2019qmr1vbu27xo9wqqzw848g07qex1xfhv6gxy86"
         onEditorChange={(newValue, editor) => {

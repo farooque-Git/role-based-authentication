@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import CreateBlogPost from "./components/CreateBlogPost";
 import { child } from "firebase/database";
+import Profile from "./components/Profile";
+import BlogList from "./components/BlogList";
 
 function App() {
   const routesArray = [
@@ -28,6 +30,14 @@ function App() {
     {
       path: "/createblogpost",
       element: <CreateBlogPost />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
+    },
+    {
+      path: "/blog",
+      element: <BlogList />,
     },
   ];
   let routesElement = useRoutes(routesArray);

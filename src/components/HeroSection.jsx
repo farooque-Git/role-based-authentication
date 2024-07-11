@@ -1,6 +1,7 @@
 import React from "react";
 import hero from "../components/image/hero.png";
 import { useNavigate } from "react-router-dom";
+import BlogList from "./BlogList";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -26,7 +27,11 @@ const HeroSection = () => {
       >
         Create Your Blog
       </button>
+      <div>
+      <BlogList/>
     </div>
+    </div>
+   
   );
 };
 
