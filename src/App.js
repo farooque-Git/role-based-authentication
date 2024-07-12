@@ -12,7 +12,7 @@ import BlogList from "./components/BlogList";
 function App() {
   const routesArray = [
     {
-      path: "*",
+      path: "login",
       element: <Login />,
     },
     {
@@ -24,7 +24,7 @@ function App() {
       element: <Register />,
     },
     {
-      path: "/home",
+      path: "/*",
       element: <Home />,
     },
     {

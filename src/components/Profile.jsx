@@ -17,7 +17,7 @@ import toast, { Toaster } from "react-hot-toast";
 const Profile = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState([]);``
 
   useEffect(() => {
     if (currentUser) {
